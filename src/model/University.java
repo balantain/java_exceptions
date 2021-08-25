@@ -7,11 +7,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class University {
-    private String name;
+    private String universityName;
     List<Faculty> faculties = new ArrayList<>();
+    List<Student> students = new ArrayList<>(); // общий список студентов университета должен создаваться из списка групп, которые находятся факультетах
 
-    public University(String name) {
-        this.name = name;
+    public University(String universityName) {
+        this.universityName = universityName;
     }
 
     public void addFaculty(Faculty... fcs){
@@ -27,6 +28,5 @@ public class University {
                 System.out.println(faculty.getFacultyName());
             }
         }
-
     }
 }

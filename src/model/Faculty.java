@@ -7,7 +7,8 @@ import java.util.List;
 public class Faculty {
     FacultyName facultyName;
     List<Group> groups = new ArrayList<>();
-    Schedule schedule = new Schedule();
+    List<Student> students = new ArrayList<>();
+    Schedule schedule = new Schedule(); // создать список дисциплин для данного факультета
 
     public Faculty(FacultyName facultyName) {
         this.facultyName = facultyName;
