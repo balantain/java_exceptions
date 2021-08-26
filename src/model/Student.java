@@ -1,9 +1,16 @@
 package model;
 
+import exceptions.NoDisciplineException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Student {
     private String name;
     private Group group; // для того, чтобы студента при создании можно было сразу добавлять в группу.
-    private Dairy dairy;// дневник успеваемости
+    List<Discipline> schedule;
+    Map<Discipline, Integer> dairy = new HashMap<>();
 
     public Student(String name) {
         this.name = name;
@@ -30,13 +37,12 @@ public class Student {
         this.group = group;
     }
 
-    public Dairy getDairy() {
-        return dairy;
+    public void setMarkForDiscipline(Discipline discipline, Integer mark) throws NoDisciplineException {
+        if (schedule.contains(discipline)){
+            dairy.put(discipline, mark);
+        }
+        else {
+            throw new NoDisciplineException("There are no such discipline in " + name + " dairy");
+        }
     }
-
-    public void setDairy(Dairy dairy) {
-        this.dairy = dairy;
-    }
-
-    // обязательно toString
 }

@@ -22,7 +22,17 @@ public enum Discipline {
     HF_HISTORY_OF_BELARUS("History Of Belarus"),
     HF_HISTORY_OF_SCIENCE_AND_TECHNICS("History Of Science And Technics");
 
-    Discipline(String title){
+    private String title;
 
+    Discipline(String title){
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

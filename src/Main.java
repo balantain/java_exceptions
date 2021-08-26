@@ -18,14 +18,14 @@ public class Main {
         } catch (NoFacultyException e) {
             e.printStackTrace();
         }
-        //----------------------------------- добавляем в каждый факультет дисциплины ----------------------------------
+        //------------------ добавляем в каждый факультет дисциплины т.к. они общие для всего факультета ---------------
         eff.addDisciplines(Discipline.EFF_BANK_ANALYSIS, Discipline.EFF_FINANCE_ANALYSIS, Discipline.EFF_MACROECONOMICS, Discipline.EFF_MICROECONOMICS);
         hf.addDisciplines(Discipline.HF_HISTORY_OF_BELARUS, Discipline.HF_HISTORY_OF_SCIENCE_AND_TECHNICS, Discipline.HF_LATIN_LANGUAGE, Discipline.HF_WORLD_HISTORY);
         irf.addDisciplines(Discipline.IRF_BELARUS_FOREIGN_POLICY,Discipline.IRF_HISTORY_OF_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_INTERNATIONAL_RELATIONS, Discipline.IRF_REGIONAL_CONFLICTS);
         mmf.addDisciplines(Discipline.MMF_ALGEBRA, Discipline.MMF_GEOMETRY, Discipline.MMF_MATHS_ANALYSIS, Discipline.MMF_PHYSICS, Discipline.MMF_PROGRAMMING);
         //------------------------------------ добавляем группы в факультет --------------------------------------------
-        Group eff1 = new Group("EFF-1"); // возможно тоже нужно поработать над неймингом
-        Group eff2 = new Group("EFF-2");
+        Group eff1 = new Group("EFF-1"); // возможно тоже нужно поработать над неймингом, а также рассмотреть возможность добавления групп
+        Group eff2 = new Group("EFF-2"); // без предварительной инициализации
         Group eff3 = new Group("EFF-3");
         Group hf1 = new Group("HF-1");
         Group hf2 = new Group("HF-2");
@@ -49,5 +49,9 @@ public class Main {
         } catch (NoGroupException e) {
             e.printStackTrace();
         }
+        //--------------------------------------------------------------------------------------------------------------
+        // нужно добавить несколько вариантов добавления студентов в университет.
+        // 1. с указанием факультета и группы при помощи конструктора
+        // 2. непосредственно в группу через метод
     }
 }

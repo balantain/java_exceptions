@@ -20,7 +20,7 @@ public class University {
     }
 
     public void printFaculties() throws NoFacultyException { // возможно также стоит проверить на null!!!!!!!!!
-        if (faculties.size() == 0){
+        if (faculties.isEmpty()){
             throw new NoFacultyException("There are no faculties in the university");
         }
         else {
