@@ -1,9 +1,9 @@
 package model;
 
-import exceptions.NoGroupException;
+import exceptions.NoGroupsException;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class Faculty {
@@ -19,7 +19,7 @@ public class Faculty {
         for(Group group : grs){
             group.schedule = schedule;
         }
-        Collections.addAll(groups, grs);
+        groups = Arrays.asList(grs);
     }
 
     public String getFacultyName() {
@@ -38,8 +38,13 @@ public class Faculty {
         this.facultyName = facultyName;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public List<Group> getGroups() throws NoGroupsException {
+        if (groups.isEmpty()){
+            throw new NoGroupsException();
+        }
+        else {
+            return groups;
+        }
     }
 
     public void setGroups(List<Group> groups) {
@@ -55,7 +60,7 @@ public class Faculty {
     }
 
     public void addDisciplines(Discipline... disciplines){
-        Collections.addAll(schedule, disciplines);
+        schedule = Arrays.asList(disciplines);
     }
 
     public void printSchedule(){
@@ -65,7 +70,7 @@ public class Faculty {
         }
     }
 
-    public void printGroups() throws NoGroupException {
+    public void printGroups() throws NoGroupsException {
         if ( groups.size() != 0){
             System.out.println("List of all groups in " + facultyName.getTitle() + " faculty:");
             for (Group group : groups){
@@ -73,7 +78,7 @@ public class Faculty {
             }
         }
         else {
-            throw new NoGroupException("There are no groups in the faculty!");
+            throw new NoGroupsException("There are no groups in the faculty!");
         }
     }
 }

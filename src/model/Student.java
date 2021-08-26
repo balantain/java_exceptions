@@ -8,17 +8,12 @@ import java.util.Map;
 
 public class Student {
     private String name;
-    private Group group; // для того, чтобы студента при создании можно было сразу добавлять в группу.
+
     List<Discipline> schedule;
     Map<Discipline, Integer> dairy = new HashMap<>();
 
     public Student(String name) {
         this.name = name;
-    }
-
-    public Student(String name, Group group) {
-        this.name = name;
-        this.group = group;
     }
 
     public String getName() {
@@ -28,14 +23,15 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Group getGroup() {
-        return group;
+//--------------------------------------------------------------------
+    public List<Discipline> getSchedule() {
+        return schedule;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setSchedule(List<Discipline> schedule) {
+        this.schedule = schedule;
     }
+//--------------------------------------------------------------------
 
     public void setMarkForDiscipline(Discipline discipline, Integer mark) throws NoDisciplineException {
         if (schedule.contains(discipline)){
@@ -45,4 +41,17 @@ public class Student {
             throw new NoDisciplineException("There are no such discipline in " + name + " dairy");
         }
     }
+    //------------------------------------------- Пока не нужно ---------------------------------------------
+//    private Group group;
+//    public Student(String name, Group group) {
+//        this.name = name;
+//        this.group = group;
+//    }
+//    public Group getGroup() {
+//        return group;
+//    }
+//
+//    public void setGroup(Group group) {
+//        this.group = group;
+//    }
 }

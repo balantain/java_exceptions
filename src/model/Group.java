@@ -3,6 +3,7 @@ package model;
 import exceptions.NoStudentsException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,10 +18,11 @@ public class Group{
     }
 
     public void addStudent(Student... sts){ // добавление студентов в группу
-        Collections.addAll(students, sts);
+        students = Arrays.asList(sts);
         for (Student student : sts){
             student.schedule = schedule;
         }
+
     }
 
     public String getTitle() {
@@ -31,8 +33,13 @@ public class Group{
         this.title = title;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public List<Student> getStudents() throws NoStudentsException {
+        if (students.isEmpty()){
+            throw new NoStudentsException();
+        }
+        else {
+            return students;
+        }
     }
 
     public void setStudents(List<Student> students) {

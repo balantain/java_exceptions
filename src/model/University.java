@@ -1,9 +1,11 @@
 package model;
 
-import exceptions.NoFacultyException;
+import exceptions.NoFacultiesException;
+import exceptions.NoGroupsException;
+import exceptions.NoStudentsException;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class University {
@@ -16,12 +18,12 @@ public class University {
     }
 
     public void addFaculty(Faculty... fcs){
-        Collections.addAll(faculties, fcs);
+        faculties = Arrays.asList(fcs);
     }
 
-    public void printFaculties() throws NoFacultyException { // возможно также стоит проверить на null!!!!!!!!!
+    public void printFaculties() throws NoFacultiesException { // возможно также стоит проверить на null!!!!!!!!!
         if (faculties.isEmpty()){
-            throw new NoFacultyException("There are no faculties in the university");
+            throw new NoFacultiesException("There are no faculties in the university");
         }
         else {
             System.out.println("List of all faculties of " + universityName + ":");
@@ -30,4 +32,54 @@ public class University {
             }
         }
     }
+    //--------------------------------------------THROW EXCEPTIONS------------------------------------------------------
+    public List<Student> getStudents () throws NoStudentsException, NoGroupsException, NoFacultiesException {
+        if (faculties.isEmpty()){
+            throw new NoFacultiesException();
+        }
+        else {
+            for (Faculty faculty : faculties){
+                for (Group group : faculty.getGroups()){
+                    students.addAll(group.getStudents());
+                }
+            }
+            return students;
+        }
+    }
+    public void printStudents () throws NoStudentsException, NoGroupsException, NoFacultiesException {
+        if (faculties.isEmpty()){
+            throw new NoFacultiesException();
+        }
+        else {
+            for (Faculty faculty : faculties){
+                for (Group group : faculty.getGroups()){
+                    students.addAll(group.getStudents());
+                }
+            }
+            System.out.println("List of all students in " + universityName + ":");
+            for (Student student : students){
+                System.out.println(student.getName());
+            }
+        }
+    }
+
+    //-------------------------------------- Есть сомнения по поводу данного метода ------------------------------------
+    public Student getStudentByName(String name) throws NoStudentsException {
+        Student std = null;
+        if (students.isEmpty()){
+            throw new NoStudentsException();
+        }
+        else {
+            for (Student student : students){
+                if (name.equals(student.getName())){
+                    std = student;
+                }
+                else{
+                    throw new NoStudentsException("There is no student with such name in the University");
+                }
+            }
+        }
+        return std;
+    }
+
 }

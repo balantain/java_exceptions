@@ -1,8 +1,7 @@
 package exceptions;
 
-public class NoGroupsException extends Exception{
+public class NoGroupsException extends Exception {
     public NoGroupsException() {
-        super();
     }
 
     public NoGroupsException(String message) {
