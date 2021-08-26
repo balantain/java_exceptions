@@ -8,7 +8,7 @@ import java.util.List;
 
 public class University {
     private String universityName;
-    List<Faculty> faculties = new ArrayList<>();
+    List<Faculty> faculties = new ArrayList<>(); // Список факультетов, как и студентов, возможно стоит преобразовать в сет, чтобы не было повторений студентов.
     List<Student> students = new ArrayList<>(); // общий список студентов университета должен создаваться из списка групп, которые находятся факультетах
 
     public University(String universityName) {
@@ -19,11 +19,12 @@ public class University {
         Collections.addAll(faculties, fcs);
     }
 
-    public void printFaculties() throws NoFacultyException {
+    public void printFaculties() throws NoFacultyException { // возможно также стоит проверить на null!!!!!!!!!
         if (faculties.size() == 0){
-            throw new NoFacultyException("There are no faculties in university");
+            throw new NoFacultyException("There are no faculties in the university");
         }
         else {
+            System.out.println("List of all faculties of " + universityName + ":");
             for (Faculty faculty : faculties){
                 System.out.println(faculty.getFacultyName());
             }

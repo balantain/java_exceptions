@@ -1,26 +1,26 @@
 package model;
 
 public enum Discipline {
-    ALGEBRA("Algebra"),
-    GEOMETRY("Analytic Geometry"),
-    MATHS_ANALYSIS("Maths Analysis"),
-    PHYSICS("Physics"),
-    PROGRAMMING("Computer Programming"),
+    MMF_ALGEBRA("Algebra"),
+    MMF_GEOMETRY("Analytic Geometry"),
+    MMF_MATHS_ANALYSIS("Maths Analysis"),
+    MMF_PHYSICS("Physics"),
+    MMF_PROGRAMMING("Computer Programming"),
 
-    HISTORY_OF_FOREIGN_POLICY("History Of Foreign Policy"),
-    HISTORY_OF_INTERNATIONAL_RELATIONS("History Of International Relations"),
-    BELARUS_FOREIGN_POLICY("Foreign Policy Of Belarus"),
-    REGIONAL_CONFLICTS("Regional Conflicts"),
+    IRF_HISTORY_OF_FOREIGN_POLICY("History Of Foreign Policy"),
+    IRF_HISTORY_OF_INTERNATIONAL_RELATIONS("History Of International Relations"),
+    IRF_BELARUS_FOREIGN_POLICY("Foreign Policy Of Belarus"),
+    IRF_REGIONAL_CONFLICTS("Regional Conflicts"),
 
-    BANK_ANALYSIS("Bank Analysis"),
-    MICROECONOMICS("Microeconomics"),
-    MACROECONOMICS("Macroeconomic Analysis"),
-    FINANCE_ANALYSIS("Finance Analysis"),
+    EFF_BANK_ANALYSIS("Bank Analysis"),
+    EFF_MICROECONOMICS("Microeconomics"),
+    EFF_MACROECONOMICS("Macroeconomic Analysis"),
+    EFF_FINANCE_ANALYSIS("Finance Analysis"),
 
-    WORLD_HISTORY("World History"),
-    LATIN_LANGUAGE("Latin Language"),
-    HISTORY_OF_BELARUS("History Of Belarus"),
-    HISTORY_OF_SCIENCE_AND_TECHNICS("History Of Science And Technics");
+    HF_WORLD_HISTORY("World History"),
+    HF_LATIN_LANGUAGE("Latin Language"),
+    HF_HISTORY_OF_BELARUS("History Of Belarus"),
+    HF_HISTORY_OF_SCIENCE_AND_TECHNICS("History Of Science And Technics");
 
     Discipline(String title){
 
