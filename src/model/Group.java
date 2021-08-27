@@ -8,21 +8,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class Group{
-    // конструктор группы можно сразу настроить для добавления любого количества студентов
     private String title;
-    List<Student> students;
-    List<Discipline> schedule;
+    List<Student> students = new ArrayList<>();
+    List<Discipline> schedule = new ArrayList<>();
 
     public Group(String title) {
         this.title = title;
     }
 
     public void addStudent(Student... sts){ // добавление студентов в группу
-        students = Arrays.asList(sts);
-        for (Student student : sts){
-            student.schedule = schedule;
+        students.addAll(Arrays.asList(sts));
+        for (Student student : students){
+            student.schedule = schedule; // возможно расписание не передается
         }
-
     }
 
     public String getTitle() {
@@ -71,5 +69,10 @@ public class Group{
         else {
             throw new NoStudentsException("There are no students in group!");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Group " + title;
     }
 }

@@ -9,29 +9,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class University {
-    private String universityName;
+    private String universityName;               //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     List<Faculty> faculties = new ArrayList<>(); // Список факультетов, как и студентов, возможно стоит преобразовать в сет, чтобы не было повторений студентов.
-    List<Student> students = new ArrayList<>(); // общий список студентов университета должен создаваться из списка групп, которые находятся факультетах
+    List<Student> students = new ArrayList<>();  // общий список студентов университета должен создаваться из списка групп, которые находятся факультетах
 
     public University(String universityName) {
         this.universityName = universityName;
     }
 
     public void addFaculty(Faculty... fcs){
-        faculties = Arrays.asList(fcs);
+        faculties.addAll(Arrays.asList(fcs));
     }
 
-    public void printFaculties() throws NoFacultiesException { // возможно также стоит проверить на null!!!!!!!!!
+    public List<Faculty> getFaculties() throws NoFacultiesException {
         if (faculties.isEmpty()){
-            throw new NoFacultiesException("There are no faculties in the university");
+            throw new NoFacultiesException("There are no faculties added into the university");
         }
-        else {
-            System.out.println("List of all faculties of " + universityName + ":");
-            for (Faculty faculty : faculties){
-                System.out.println(faculty.getFacultyName());
-            }
-        }
+        else return faculties;
     }
+
     //--------------------------------------------THROW EXCEPTIONS------------------------------------------------------
     public List<Student> getStudents () throws NoStudentsException, NoGroupsException, NoFacultiesException {
         if (faculties.isEmpty()){
@@ -46,6 +42,28 @@ public class University {
             return students;
         }
     }
+    //------------------- Есть сомнения по поводу данного метода, как поступить, если студент не найден? ---------------
+    public Student getStudentByName(String name) throws NoStudentsException, NoGroupsException, NoFacultiesException {
+        students = getStudents();
+        Student std = null;
+        if (students.isEmpty()){
+            throw new NoStudentsException("There are no students in the university");
+        }
+        else {
+            for (Student student : students){
+                if (name.equals(student.getName())){
+                    std = student;
+                    break;
+                }
+                else{
+                    throw new NoStudentsException("There is no student with such name in the University");
+                }
+            }
+        }
+        return std;
+    }
+
+//----------------------------------------------------------------------------------------------------------------------
     public void printStudents () throws NoStudentsException, NoGroupsException, NoFacultiesException {
         if (faculties.isEmpty()){
             throw new NoFacultiesException();
@@ -62,24 +80,16 @@ public class University {
             }
         }
     }
-
-    //-------------------------------------- Есть сомнения по поводу данного метода ------------------------------------
-    public Student getStudentByName(String name) throws NoStudentsException {
-        Student std = null;
-        if (students.isEmpty()){
-            throw new NoStudentsException();
+    //------------------------------------Вспомогательный метод для простоты вывода в консоль ------------------------------
+    public void printFaculties() throws NoFacultiesException { // возможно также стоит проверить на null!!!!!!!!!
+        if (faculties.isEmpty()){
+            throw new NoFacultiesException("There are no faculties in the university");
         }
         else {
-            for (Student student : students){
-                if (name.equals(student.getName())){
-                    std = student;
-                }
-                else{
-                    throw new NoStudentsException("There is no student with such name in the University");
-                }
+            System.out.println("List of all faculties of " + universityName + ":");
+            for (Faculty faculty : faculties){
+                System.out.println(faculty.getFacultyName());
             }
         }
-        return std;
     }
-
 }

@@ -15,11 +15,12 @@ public class Faculty {
     public Faculty(FacultyName facultyName) {
         this.facultyName = facultyName;
     }
-    public void addGroup(Group... grs){
-        for(Group group : grs){
+
+    public void addGroup(Group... grs) {
+        for (Group group : grs) {
             group.schedule = schedule;
         }
-        groups = Arrays.asList(grs);
+        groups.addAll(Arrays.asList(grs));
     }
 
     public String getFacultyName() {
@@ -39,10 +40,9 @@ public class Faculty {
     }
 
     public List<Group> getGroups() throws NoGroupsException {
-        if (groups.isEmpty()){
+        if (groups.isEmpty()) {
             throw new NoGroupsException();
-        }
-        else {
+        } else {
             return groups;
         }
     }
@@ -55,29 +55,32 @@ public class Faculty {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
+//    public void setStudents(List<Student> students) {
+//        this.students = students;
+//    }
 
-    public void addDisciplines(Discipline... disciplines){
+    public void addDisciplines(Discipline... disciplines) {
         schedule = Arrays.asList(disciplines);
     }
 
-    public void printSchedule(){
+
+//------------------------------------Вспомогательные методы для простоты вывода в консоль -----------------------------
+//                                                РАССПИСАНИЕ
+    public void printSchedule() {
         System.out.println("List of disciplines of " + facultyName.getTitle() + " faculty:");
-        for (Discipline discipline : schedule){
+        for (Discipline discipline : schedule) {
             System.out.println(discipline.getTitle());
         }
     }
 
+//                                               СПИСОК ГРУПП
     public void printGroups() throws NoGroupsException {
-        if ( groups.size() != 0){
+        if (groups.size() != 0) {
             System.out.println("List of all groups in " + facultyName.getTitle() + " faculty:");
-            for (Group group : groups){
+            for (Group group : groups) {
                 System.out.println(group.getTitle());
             }
-        }
-        else {
+        } else {
             throw new NoGroupsException("There are no groups in the faculty!");
         }
     }

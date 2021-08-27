@@ -41,7 +41,13 @@ public class Student {
             throw new NoDisciplineException("There are no such discipline in " + name + " dairy");
         }
     }
-    //------------------------------------------- Пока не нужно ---------------------------------------------
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+//------------------------------------------- Пока не нужно ---------------------------------------------
 //    private Group group;
 //    public Student(String name, Group group) {
 //        this.name = name;
