@@ -56,7 +56,7 @@ public class University {
     }
 
 //------------------- Есть сомнения по поводу данного метода, как поступить, если студент не найден? ---------------
-    public Student getStudentByName(List<Student> students, String name) throws NoStudentsException, NoGroupsException, NoFacultiesException {
+    public Student getStudentByName(String name) throws NoStudentsException, NoGroupsException, NoFacultiesException {
         Student std = null;
         if (students.isEmpty()){
             throw new NoStudentsException("There are no students in the university");
@@ -67,10 +67,10 @@ public class University {
                     std = student;
                     break;
                 }
-                else{
-                    throw new NoStudentsException("There is no student with such name in the University");
-                }
             }
+        }
+        if (std == null){
+            throw new NoStudentsException("There are no such student in the university");
         }
         return std;
     }

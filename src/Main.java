@@ -1,12 +1,15 @@
 import exceptions.*;
 import model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // нужно добавить несколько вариантов добавления студентов в университет.
 // 1. с указанием факультета и группы при помощи конструктора
 // 2. непосредственно в группу через метод
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoFacultiesException, NoGroupsException, NoStudentsException {
 //------------------------------------------- Create university --------------------------------------------------------
 
         University university = new University("BGU");
@@ -135,7 +138,7 @@ public class Main {
 //--------------------------------------------- Realizing tasks --------------------------------------------------------
 //                           Count average mark value for all disciplines fo student
         try {
-            university.countAvrMarkValueForStudentDairy(university.getStudentByName(university.getStudents(), "Егоров Е.А."));
+            university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
         } catch (NoDisciplineException | NoStudentsException | NoGroupsException | NoFacultiesException e) {
             e.printStackTrace();
         }
