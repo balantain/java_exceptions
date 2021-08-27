@@ -1,12 +1,8 @@
 package model;
 
-import exceptions.NoFacultiesException;
-import exceptions.NoGroupsException;
-import exceptions.NoStudentsException;
+import exceptions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class University {
     private String universityName;               //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -15,6 +11,22 @@ public class University {
 
     public University(String universityName) {
         this.universityName = universityName;
+    }
+
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
+    }
+
+    public void setFaculties(List<Faculty> faculties) {
+        this.faculties = faculties;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public void addFaculty(Faculty... fcs){
@@ -28,12 +40,12 @@ public class University {
         else return faculties;
     }
 
-    //--------------------------------------------THROW EXCEPTIONS------------------------------------------------------
     public List<Student> getStudents () throws NoStudentsException, NoGroupsException, NoFacultiesException {
         if (faculties.isEmpty()){
             throw new NoFacultiesException();
         }
         else {
+            students.clear();
             for (Faculty faculty : faculties){
                 for (Group group : faculty.getGroups()){
                     students.addAll(group.getStudents());
@@ -42,9 +54,9 @@ public class University {
             return students;
         }
     }
-    //------------------- Есть сомнения по поводу данного метода, как поступить, если студент не найден? ---------------
-    public Student getStudentByName(String name) throws NoStudentsException, NoGroupsException, NoFacultiesException {
-        students = getStudents();
+
+//------------------- Есть сомнения по поводу данного метода, как поступить, если студент не найден? ---------------
+    public Student getStudentByName(List<Student> students, String name) throws NoStudentsException, NoGroupsException, NoFacultiesException {
         Student std = null;
         if (students.isEmpty()){
             throw new NoStudentsException("There are no students in the university");
@@ -63,24 +75,29 @@ public class University {
         return std;
     }
 
-//----------------------------------------------------------------------------------------------------------------------
-    public void printStudents () throws NoStudentsException, NoGroupsException, NoFacultiesException {
-        if (faculties.isEmpty()){
-            throw new NoFacultiesException();
-        }
-        else {
-            for (Faculty faculty : faculties){
-                for (Group group : faculty.getGroups()){
-                    students.addAll(group.getStudents());
-                }
-            }
-            System.out.println("List of all students in " + universityName + ":");
-            for (Student student : students){
-                System.out.println(student.getName());
-            }
+    public void setRandomMarksForStudents (List<Student> studentList) throws NoDisciplineException, MarkValueException {
+        for (Student student : studentList){
+            student.setRandomMarksToDairy();
         }
     }
-    //------------------------------------Вспомогательный метод для простоты вывода в консоль ------------------------------
+
+    public void countAvrMarkValueForStudentDairy(Student student) throws NoDisciplineException {
+        double avrMarkValue = 0;
+        if (student.getDairy().isEmpty()){
+            throw new NoDisciplineException("There are no disciplines in student's dairy");
+        }
+        else {
+            Collection<Integer> markValues = student.getDairy().values();
+            int result = 0;
+            for (Integer integer : markValues){
+                result += integer;
+            }
+            avrMarkValue = result/markValues.size();
+        }
+        System.out.println("Average mark value for student " + student + " is: " + avrMarkValue);
+    }
+
+//-------------------------------Вспомогательный метод для простоты вывода в консоль списка факультетов-----------------
     public void printFaculties() throws NoFacultiesException { // возможно также стоит проверить на null!!!!!!!!!
         if (faculties.isEmpty()){
             throw new NoFacultiesException("There are no faculties in the university");

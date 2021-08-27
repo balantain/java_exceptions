@@ -19,7 +19,7 @@ public class Group{
     public void addStudent(Student... sts){ // добавление студентов в группу
         students.addAll(Arrays.asList(sts));
         for (Student student : students){
-            student.schedule = schedule; // возможно расписание не передается
+            student.setSchedule(schedule); // возможно расписание не передается
         }
     }
 
