@@ -143,6 +143,13 @@ public class Main {
             e.printStackTrace();
         }
 
+//----------------------------------------------------------------------------------------------------------------------
+//                 Count average mark for concrete discipline at concrete faculty and concrete group
+// метод должен вызываться у класса faculty и group (ex.: mmf.countAvrMarkForDiscipline(Discipline discipline) throw NoFacultyException) -
+// также можно переименовать эксепшены с NoFacultiesException в NoFacultyException (то же самое и с группами)
+
+
+
         //-- Если начинать процесс создания студента с самого студента и передавать в него параметры группа и факультет, то в параметре факультет можно сохранить список предметов
         // но тогда будет вероятность
     }

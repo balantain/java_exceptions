@@ -92,7 +92,7 @@ public class University {
             for (Integer integer : markValues){
                 result += integer;
             }
-            avrMarkValue = result/markValues.size();
+            avrMarkValue = (double) result/markValues.size();
         }
         System.out.println("Average mark value for student " + student + " is: " + avrMarkValue);
     }

@@ -52,6 +52,9 @@ public class Faculty {
     }
 
     public List<Student> getStudents() {
+        for (Group group : groups){
+            students.addAll(group.students);
+        }
         return students;
     }
 
