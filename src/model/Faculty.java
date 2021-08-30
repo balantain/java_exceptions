@@ -1,10 +1,10 @@
 package model;
 
-import exceptions.NoGroupsException;
+import exceptions.NoDisciplineException;
+import exceptions.NoGroupException;
+import exceptions.NoStudentException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Faculty {
     FacultyName facultyName;
@@ -19,6 +19,7 @@ public class Faculty {
     public void addGroup(Group... grs) {
         for (Group group : grs) {
             group.schedule = schedule;
+            group.facultyName = facultyName;
         }
         groups.addAll(Arrays.asList(grs));
     }
@@ -39,9 +40,9 @@ public class Faculty {
         this.facultyName = facultyName;
     }
 
-    public List<Group> getGroups() throws NoGroupsException {
+    public List<Group> getGroups() throws NoGroupException {
         if (groups.isEmpty()) {
-            throw new NoGroupsException();
+            throw new NoGroupException("There are no groups in " + facultyName.getTitle());
         } else {
             return groups;
         }
@@ -51,16 +52,40 @@ public class Faculty {
         this.groups = groups;
     }
 
-    public List<Student> getStudents() {
+    public List<Student> getStudents() throws NoGroupException, NoStudentException {
+        students.clear();
+        if (groups.isEmpty()){
+            throw new NoGroupException("There are no groups in " + facultyName.getTitle());
+        }
         for (Group group : groups){
-            students.addAll(group.students);
+            if (group.students.isEmpty()){
+                throw new NoStudentException("There are no students in group " + group.getTitle());
+            }
+            else {
+                students.addAll(group.students);
+            }
         }
         return students;
     }
+// NEED TO OVERRIDE THIS METHOD TO GET AVERAGE VALUE FROM EACH GROUP (group.countAvrMarkValueForDiscipline(Discipline discipline))
 
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
+    public void countAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException, NoDisciplineException {
+        Collection<Integer> markValues = new ArrayList<>();
+        double avrMarkValue = 0;
+        if (!schedule.contains(discipline)){
+            throw new NoDisciplineException("There is no such discipline in " + facultyName.getTitle());
+        } else {
+            for (Student student : getStudents()){
+                markValues.add(student.getDairy().get(discipline));
+            }
+        }
+        int result = 0;
+        for (Integer integer : markValues){
+            result += integer;
+        }
+        avrMarkValue = (double) result/markValues.size();
+        System.out.println("Average mark value for discipline " + discipline.getTitle() + " at " + facultyName.getTitle() + " is: " + avrMarkValue);
+    }
 
     public void addDisciplines(Discipline... disciplines) {
         schedule = Arrays.asList(disciplines);
@@ -77,14 +102,14 @@ public class Faculty {
     }
 
 //                                               СПИСОК ГРУПП
-    public void printGroups() throws NoGroupsException {
+    public void printGroups() throws NoGroupException {
         if (groups.size() != 0) {
             System.out.println("List of all groups in " + facultyName.getTitle() + " faculty:");
             for (Group group : groups) {
                 System.out.println(group.getTitle());
             }
         } else {
-            throw new NoGroupsException("There are no groups in the faculty!");
+            throw new NoGroupException("There are no groups in the faculty!");
         }
     }
 }

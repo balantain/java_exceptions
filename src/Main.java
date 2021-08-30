@@ -1,15 +1,12 @@
 import exceptions.*;
 import model.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // нужно добавить несколько вариантов добавления студентов в университет.
 // 1. с указанием факультета и группы при помощи конструктора
 // 2. непосредственно в группу через метод
 
 public class Main {
-    public static void main(String[] args) throws NoFacultiesException, NoGroupsException, NoStudentsException {
+    public static void main(String[] args){
 //------------------------------------------- Create university --------------------------------------------------------
 
         University university = new University("BGU");
@@ -121,7 +118,7 @@ public class Main {
 
         try {
             university.setRandomMarksForStudents(university.getStudents());
-        } catch (NoDisciplineException | MarkValueException | NoStudentsException | NoGroupsException | NoFacultiesException e) {
+        } catch (NoDisciplineException | MarkValueException | NoStudentException | NoGroupException | NoFacultyException e) {
             e.printStackTrace();
         }
 
@@ -131,23 +128,36 @@ public class Main {
             for (Student student : university.getStudents()){
                 System.out.println(student.toStringWithDairy());
             }
-        } catch (NoFacultiesException | NoGroupsException | NoStudentsException e) {
+        } catch (NoStudentException | NoGroupException | NoFacultyException e) {
             e.printStackTrace();
         }
 
 //--------------------------------------------- Realizing tasks --------------------------------------------------------
 //                           Count average mark value for all disciplines fo student
-        try {
-            university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
-        } catch (NoDisciplineException | NoStudentsException | NoGroupsException | NoFacultiesException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
+//        } catch (NoDisciplineException | NoStudentsException | NoGroupsException | NoFacultiesException e) {
+//            e.printStackTrace();
+//        }
 
 //----------------------------------------------------------------------------------------------------------------------
 //                 Count average mark for concrete discipline at concrete faculty and concrete group
-// метод должен вызываться у класса faculty и group (ex.: mmf.countAvrMarkForDiscipline(Discipline discipline) throw NoFacultyException) -
-// также можно переименовать эксепшены с NoFacultiesException в NoFacultyException (то же самое и с группами)
+//---------------------- Printing list of students with dairy in faculty to check (successfully) -----------------------
+        System.out.println("List of all students with dairy in " + mmf.getFacultyName());
+        try {
+            for (Student student : mmf.getStudents()){
+                System.out.println(student.toStringWithDairy());
+            }
+        } catch (NoGroupException | NoStudentException e) {
+            e.printStackTrace();
+        }
 
+
+        try {
+            mmf.countAvrMarkForDiscipline(Discipline.MMF_ALGEBRA);
+        } catch (NoDisciplineException | NoGroupException | NoStudentException e) {
+            e.printStackTrace();
+        }
 
 
         //-- Если начинать процесс создания студента с самого студента и передавать в него параметры группа и факультет, то в параметре факультет можно сохранить список предметов

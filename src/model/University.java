@@ -33,16 +33,16 @@ public class University {
         faculties.addAll(Arrays.asList(fcs));
     }
 
-    public List<Faculty> getFaculties() throws NoFacultiesException {
+    public List<Faculty> getFaculties() throws NoFacultyException {
         if (faculties.isEmpty()){
-            throw new NoFacultiesException("There are no faculties added into the university");
+            throw new NoFacultyException("There are no faculties added into the university");
         }
         else return faculties;
     }
 
-    public List<Student> getStudents () throws NoStudentsException, NoGroupsException, NoFacultiesException {
+    public List<Student> getStudents () throws NoStudentException, NoGroupException, NoFacultyException {
         if (faculties.isEmpty()){
-            throw new NoFacultiesException();
+            throw new NoFacultyException();
         }
         else {
             students.clear();
@@ -56,10 +56,10 @@ public class University {
     }
 
 //------------------- Есть сомнения по поводу данного метода, как поступить, если студент не найден? ---------------
-    public Student getStudentByName(String name) throws NoStudentsException, NoGroupsException, NoFacultiesException {
+    public Student getStudentByName(String name) throws NoStudentException, NoGroupException, NoFacultyException {
         Student std = null;
         if (students.isEmpty()){
-            throw new NoStudentsException("There are no students in the university");
+            throw new NoStudentException("There are no students in the university");
         }
         else {
             for (Student student : students){
@@ -70,7 +70,7 @@ public class University {
             }
         }
         if (std == null){
-            throw new NoStudentsException("There are no such student in the university");
+            throw new NoStudentException("There are no such student in the university");
         }
         return std;
     }
@@ -98,9 +98,9 @@ public class University {
     }
 
 //-------------------------------Вспомогательный метод для простоты вывода в консоль списка факультетов-----------------
-    public void printFaculties() throws NoFacultiesException { // возможно также стоит проверить на null!!!!!!!!!
+    public void printFaculties() throws NoFacultyException { // возможно также стоит проверить на null!!!!!!!!!
         if (faculties.isEmpty()){
-            throw new NoFacultiesException("There are no faculties in the university");
+            throw new NoFacultyException("There are no faculties in the university");
         }
         else {
             System.out.println("List of all faculties of " + universityName + ":");
