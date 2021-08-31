@@ -5,6 +5,7 @@ import exceptions.NoStudentException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Group{
@@ -52,10 +53,13 @@ public class Group{
     public void setSchedule(List<Discipline> schedule) {
         this.schedule = schedule;
     }
-// WORKING WITH THIS METHOD.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void countAvrMarkForDiscipline(Discipline discipline) throws NoDisciplineException, NoStudentException {
+
+    public double getAvrMarkForDiscipline(Discipline discipline) throws NoStudentException {
+        Collection<Integer> markValues = new ArrayList<>();
+        double avrMarkValue;
+        int result = 0;
         if (!schedule.contains(discipline)){
-            throw new NoDisciplineException("There is no such discipline at " + facultyName);
+            avrMarkValue = 0;
         }
         else {
             if (students.isEmpty()){
@@ -63,10 +67,19 @@ public class Group{
             }
             else {
                 for (Student student : students){
-
+                    markValues.add(student.getDairy().get(discipline));
+                }
+                for (Integer integer : markValues){
+                    result += integer;
                 }
             }
+            avrMarkValue = (double) result/markValues.size();
         }
+        return avrMarkValue;
+    }
+    public void printAvrMarkForDiscipline(Discipline discipline) throws NoStudentException {
+        System.out.println("Average mark for discipline " + discipline.getTitle() + " in group " + title + " is " + getAvrMarkForDiscipline(discipline));
+
     }
 //--------------------------------------------- Maybe redundant ---------------------------------------------------
     public void printSchedule(){                                    // вывод на печать списка дисциплин в группе

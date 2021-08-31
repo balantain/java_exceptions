@@ -22,12 +22,12 @@ public class Main {
 
 //--------------------------------- Print list of students to check (successfully) -------------------------------------
 
-//        try {
-//            university.printFaculties();
-//        } catch (NoFacultiesException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println();
+        try {
+            university.printFaculties();
+        } catch (NoFacultyException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
 
 //-------------- Add disciplines to each faculty, because they are common for all groups in faculty --------------------
 //                                             For convenience created enum
@@ -39,14 +39,14 @@ public class Main {
 
 //--------------------------------- Print list of disciplines to check (successfully) ----------------------------------
 
-//        eff.printSchedule();
-//        System.out.println();
-//        hf.printSchedule();
-//        System.out.println();
-//        irf.printSchedule();
-//        System.out.println();
-//        mmf.printSchedule();
-//        System.out.println();
+        eff.printSchedule();
+        System.out.println();
+        hf.printSchedule();
+        System.out.println();
+        irf.printSchedule();
+        System.out.println();
+        mmf.printSchedule();
+        System.out.println();
 
 //-------------------------------------- Add groups to each faculty ----------------------------------------------------
 
@@ -69,14 +69,14 @@ public class Main {
 
 //---------------------------- Print list of groups for each faculty to check (successfully) ---------------------------
 
-//        try {
-//            eff.printGroups();
-//            hf.printGroups();
-//            irf.printGroups();
-//            mmf.printGroups();
-//        } catch (NoGroupsException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            eff.printGroups();
+            hf.printGroups();
+            irf.printGroups();
+            mmf.printGroups();
+        } catch (NoGroupException e) {
+            e.printStackTrace();
+        }
 
 //---------------------------------------------- Add students to each group --------------------------------------------
 
@@ -94,25 +94,25 @@ public class Main {
 
 //---------------------------- Print list of all students in university to check (successfully) ------------------------
 
-//        System.out.println("List of all students in " + university.getUniversityName() + ":");
-//        try {
-//            for (Student student : university.getStudents()){
-//                System.out.println(student.toString());
-//            }
-//        } catch (NoStudentsException | NoGroupsException | NoFacultiesException e) {
-//            e.printStackTrace();
-//        }
+        System.out.println("List of all students in " + university.getUniversityName() + ":");
+        try {
+            for (Student student : university.getStudents()){
+                System.out.println(student.toString());
+            }
+        } catch (NoStudentException | NoGroupException | NoFacultyException e) {
+            e.printStackTrace();
+        }
 
 //-------------------- Print list of all students in university with schedule to check (successfully) ------------------
 
-//        System.out.println("List of all students in " + university.getUniversityName() + " with schedule:");
-//        try {
-//            for (Student student : university.getStudents()){
-//                System.out.println(student.toStringWithSchedule());
-//            }
-//        } catch (NoStudentsException | NoGroupsException | NoFacultiesException e) {
-//            e.printStackTrace();
-//        }
+        System.out.println("List of all students in " + university.getUniversityName() + " with schedule:");
+        try {
+            for (Student student : university.getStudents()){
+                System.out.println(student.toStringWithSchedule());
+            }
+        } catch (NoStudentException | NoGroupException | NoFacultyException e) {
+            e.printStackTrace();
+        }
 
 //---------------------------- Set random marks for each student in university -----------------------------------------
 
@@ -123,6 +123,7 @@ public class Main {
         }
 
 //------------------- Print list of all students in university with dairy to check (successfully) ----------------------
+
         System.out.println("List of all students in " + university.getUniversityName() + " with dairy:");
         try {
             for (Student student : university.getStudents()){
@@ -134,15 +135,16 @@ public class Main {
 
 //--------------------------------------------- Realizing tasks --------------------------------------------------------
 //                           Count average mark value for all disciplines fo student
-//        try {
-//            university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
-//        } catch (NoDisciplineException | NoStudentsException | NoGroupsException | NoFacultiesException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
+        } catch (NoDisciplineException | NoStudentException | NoGroupException | NoFacultyException e) {
+            e.printStackTrace();
+        }
 
 //----------------------------------------------------------------------------------------------------------------------
 //                 Count average mark for concrete discipline at concrete faculty and concrete group
 //---------------------- Printing list of students with dairy in faculty to check (successfully) -----------------------
+
         System.out.println("List of all students with dairy in " + mmf.getFacultyName());
         try {
             for (Student student : mmf.getStudents()){
@@ -154,11 +156,16 @@ public class Main {
 
 
         try {
-            mmf.countAvrMarkForDiscipline(Discipline.MMF_ALGEBRA);
-        } catch (NoDisciplineException | NoGroupException | NoStudentException e) {
+            mmf1.printAvrMarkForDiscipline(Discipline.MMF_GEOMETRY);
+        } catch (NoStudentException e) {
             e.printStackTrace();
         }
 
+        try {
+            mmf.printAvrMarkForDiscipline(Discipline.MMF_ALGEBRA);
+        } catch (NoDisciplineException | NoGroupException | NoStudentException e) {
+            e.printStackTrace();
+        }
 
         //-- Если начинать процесс создания студента с самого студента и передавать в него параметры группа и факультет, то в параметре факультет можно сохранить список предметов
         // но тогда будет вероятность

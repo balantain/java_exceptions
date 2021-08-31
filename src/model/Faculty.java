@@ -69,22 +69,24 @@ public class Faculty {
     }
 // NEED TO OVERRIDE THIS METHOD TO GET AVERAGE VALUE FROM EACH GROUP (group.countAvrMarkValueForDiscipline(Discipline discipline))
 
-    public void countAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException, NoDisciplineException {
-        Collection<Integer> markValues = new ArrayList<>();
-        double avrMarkValue = 0;
-        if (!schedule.contains(discipline)){
-            throw new NoDisciplineException("There is no such discipline in " + facultyName.getTitle());
-        } else {
-            for (Student student : getStudents()){
-                markValues.add(student.getDairy().get(discipline));
+    public double getAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException, NoDisciplineException {
+        Collection<Double> groupAvrMarkValues = new ArrayList<>();
+        double result = 0;
+        if (groups.isEmpty()){
+            throw new NoGroupException("There are no groups in " + facultyName.getTitle());
+        }
+        else {
+            for (Group group : groups){
+                groupAvrMarkValues.add(group.getAvrMarkForDiscipline(discipline));
             }
         }
-        int result = 0;
-        for (Integer integer : markValues){
-            result += integer;
+        for (Double groupAvrValue  : groupAvrMarkValues){
+            result += groupAvrValue;
         }
-        avrMarkValue = (double) result/markValues.size();
-        System.out.println("Average mark value for discipline " + discipline.getTitle() + " at " + facultyName.getTitle() + " is: " + avrMarkValue);
+        return result/groupAvrMarkValues.size();
+    }
+    public void printAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoDisciplineException, NoStudentException {
+        System.out.println("Average mark for discipline " + discipline.getTitle() + " in " + facultyName.getTitle() + " is " + getAvrMarkForDiscipline(discipline));
     }
 
     public void addDisciplines(Discipline... disciplines) {
