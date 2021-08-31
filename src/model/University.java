@@ -8,6 +8,7 @@ public class University {
     private String universityName;
     Set<Faculty> faculties = new HashSet<>();
     List<Student> students = new ArrayList<>();
+    Set<Discipline> schedule = new HashSet<>();
 
     public University(String universityName) {
         this.universityName = universityName;
@@ -31,6 +32,13 @@ public class University {
 
     public void addFaculty(Faculty... fcs){
         faculties.addAll(Arrays.asList(fcs));
+    }
+
+    public void addDiscipline(Discipline... discipline){
+        schedule.addAll(Arrays.asList(discipline));
+        for (Faculty faculty : faculties){
+            faculty.schedule.addAll(schedule);
+        }
     }
 
     public Set<Faculty> getFaculties() throws NoFacultyException {
