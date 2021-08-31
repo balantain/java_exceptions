@@ -3,16 +3,13 @@ package model;
 import exceptions.NoDisciplineException;
 import exceptions.NoStudentException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Group{
     private String title;
     FacultyName facultyName;
     List<Student> students = new ArrayList<>();
-    List<Discipline> schedule = new ArrayList<>();
+    Set<Discipline> schedule = new HashSet<>();
 
     public Group(String title) {
         this.title = title;
@@ -46,11 +43,11 @@ public class Group{
         this.students = students;
     }
 
-    public List<Discipline> getSchedule() {
+    public Set<Discipline> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(List<Discipline> schedule) {
+    public void setSchedule(Set<Discipline> schedule) {
         this.schedule = schedule;
     }
 
@@ -84,7 +81,9 @@ public class Group{
             System.out.println("Average mark for discipline " + discipline.getTitle() + " in group " + title + " is " + getAvrMarkForDiscipline(discipline));
         }
     }
-//--------------------------------------------- Maybe redundant ---------------------------------------------------
+//-------------------------- Methods to print to console (redundant for the main task) ---------------------------------
+//                                            Schedule
+
     public void printSchedule(){
         System.out.println("List of disciplines of " + title + " group:");
         for (Discipline discipline : schedule){
@@ -92,7 +91,9 @@ public class Group{
         }
     }
 
-    public void printStudents() throws NoStudentException {        // вывод на печать списка студентов в группе
+//                                          Students list
+
+    public void printStudents() throws NoStudentException {
         if (!students.isEmpty()){
             System.out.println("List of students of " + title + " group:");
             for (Student student : students){
@@ -103,7 +104,9 @@ public class Group{
             throw new NoStudentException("There are no students in group!");
         }
     }
+
 //----------------------------------------------------------------------------------------------------------------------
+
     @Override
     public String toString() {
         return "Group " + title;
