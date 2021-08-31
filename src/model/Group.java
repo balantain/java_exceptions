@@ -1,6 +1,5 @@
 package model;
 
-import exceptions.NoDisciplineException;
 import exceptions.NoStudentException;
 
 import java.util.*;
@@ -9,7 +8,7 @@ public class Group{
     private String title;
     FacultyName facultyName;
     List<Student> students = new ArrayList<>();
-    Set<Discipline> schedule = new HashSet<>();
+    Set<Discipline> disciplines = new HashSet<>();
 
     public Group(String title) {
         this.title = title;
@@ -18,8 +17,16 @@ public class Group{
     public void addStudent(Student... sts){
         students.addAll(Arrays.asList(sts));
         for (Student student : students){
-            student.setSchedule(schedule);
+            student.setDisciplines(disciplines);
         }
+    }
+
+    public FacultyName getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(FacultyName facultyName) {
+        this.facultyName = facultyName;
     }
 
     public String getTitle() {
@@ -43,19 +50,19 @@ public class Group{
         this.students = students;
     }
 
-    public Set<Discipline> getSchedule() {
-        return schedule;
+    public Set<Discipline> getDisciplines() {
+        return disciplines;
     }
 
-    public void setSchedule(Set<Discipline> schedule) {
-        this.schedule = schedule;
+    public void setDisciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
     }
 
     public double getAvrMarkForDiscipline(Discipline discipline) throws NoStudentException {
         Collection<Integer> markValues = new ArrayList<>();
         double avrMarkValue;
         int result = 0;
-        if (!schedule.contains(discipline)){
+        if (!disciplines.contains(discipline)){
             avrMarkValue = 0;
         }
         else {
@@ -86,7 +93,7 @@ public class Group{
 
     public void printSchedule(){
         System.out.println("List of disciplines of " + title + " group:");
-        for (Discipline discipline : schedule){
+        for (Discipline discipline : disciplines){
             System.out.println(discipline.getTitle());
         }
     }

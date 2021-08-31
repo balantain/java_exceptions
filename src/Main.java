@@ -6,6 +6,7 @@ public class Main {
 //------------------------------------------- Create university --------------------------------------------------------
 
         University university = new University("BGU");
+        university.addDiscipline(Discipline.FRENCH);
 
 //--------------------------------------------- Add faculties ----------------------------------------------------------
 //                                        For convenience created enum
@@ -28,7 +29,7 @@ public class Main {
         hf.addDisciplines(Discipline.HF_HISTORY_OF_BELARUS, Discipline.HF_HISTORY_OF_SCIENCE_AND_TECHNICS, Discipline.HF_LATIN_LANGUAGE, Discipline.HF_WORLD_HISTORY);
         irf.addDisciplines(Discipline.IRF_BELARUS_FOREIGN_POLICY,Discipline.IRF_HISTORY_OF_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_INTERNATIONAL_RELATIONS, Discipline.IRF_REGIONAL_CONFLICTS);
         mmf.addDisciplines(Discipline.MMF_ALGEBRA, Discipline.MMF_GEOMETRY, Discipline.MMF_MATHS_ANALYSIS, Discipline.MMF_PHYSICS, Discipline.MMF_PROGRAMMING);
-
+        university.addDiscipline(Discipline.GERMAN);
 //--------------------------------- Print list of disciplines to check (successfully) ----------------------------------
 
         eff.printSchedule();
@@ -106,11 +107,10 @@ public class Main {
         }
 
 //--------------------------------------------- Realizing tasks --------------------------------------------------------
-//                           Count average mark value for all disciplines fo student
+//                           Count average mark value for all disciplines for student
 
         university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
 
-//----------------------------------------------------------------------------------------------------------------------
 //                 Count average mark for concrete discipline at concrete faculty and concrete group
 //---------------------- Printing list of students with dairy in faculty to check (successfully) -----------------------
 
@@ -127,5 +127,6 @@ public class Main {
         irf.printAvrMarkForDiscipline(Discipline.ENGLISH);
 
         university.printAvrMarkValueForDiscipline(Discipline.ENGLISH);
+        university.printAvrMarkValueForDiscipline(Discipline.GERMAN);
     }
 }

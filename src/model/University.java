@@ -8,7 +8,7 @@ public class University {
     private String universityName;
     Set<Faculty> faculties = new HashSet<>();
     List<Student> students = new ArrayList<>();
-    Set<Discipline> schedule = new HashSet<>();
+    Set<Discipline> disciplines = new HashSet<>();
 
     public University(String universityName) {
         this.universityName = universityName;
@@ -32,12 +32,15 @@ public class University {
 
     public void addFaculty(Faculty... fcs){
         faculties.addAll(Arrays.asList(fcs));
+        for (Faculty faculty : faculties){
+            faculty.disciplines.addAll(disciplines);
+        }
     }
 
-    public void addDiscipline(Discipline... discipline){
-        schedule.addAll(Arrays.asList(discipline));
+    public void addDiscipline(Discipline... dspls){
+        disciplines.addAll(Arrays.asList(dspls));
         for (Faculty faculty : faculties){
-            faculty.schedule.addAll(schedule);
+            faculty.disciplines.addAll(Arrays.asList(dspls));
         }
     }
 

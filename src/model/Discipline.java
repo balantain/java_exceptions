@@ -22,7 +22,9 @@ public enum Discipline {
     HF_HISTORY_OF_BELARUS("History Of Belarus"),
     HF_HISTORY_OF_SCIENCE_AND_TECHNICS("History Of Science And Technics"),
 
-    ENGLISH("\"English language\"");
+    ENGLISH("\"English language\""),
+    FRENCH("\"Franch language\""),
+    GERMAN("\"German language\"");
 
     private String title;
 

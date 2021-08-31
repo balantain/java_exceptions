@@ -10,7 +10,7 @@ public class Faculty {
     FacultyName facultyName;
     Set<Group> groups = new HashSet<>();
     List<Student> students = new ArrayList<>();
-    Set<Discipline> schedule = new HashSet<>();
+    Set<Discipline> disciplines = new HashSet<>();
 
     public Faculty(FacultyName facultyName) {
         this.facultyName = facultyName;
@@ -18,7 +18,7 @@ public class Faculty {
 
     public void addGroup(Group... grs) {
         for (Group group : grs) {
-            group.schedule = schedule;
+            group.disciplines = disciplines;
             group.facultyName = facultyName;
         }
         groups.addAll(Arrays.asList(grs));
@@ -28,12 +28,12 @@ public class Faculty {
         return facultyName.getTitle();
     }
 
-    public Set<Discipline> getSchedule() {
-        return schedule;
+    public Set<Discipline> getDisciplines() {
+        return disciplines;
     }
 
-    public void setSchedule(Set<Discipline> schedule) {
-        this.schedule = schedule;
+    public void setDisciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
     }
 
     public void setFacultyName(FacultyName facultyName) {
@@ -68,6 +68,10 @@ public class Faculty {
         return students;
     }
 
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
     public double getAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException {
         Collection<Double> groupAvrMarkValues = new ArrayList<>();
         double groupAvrMarkValue;
@@ -76,7 +80,7 @@ public class Faculty {
             throw new NoGroupException("There are no groups in " + facultyName.getTitle());
         }
         else {
-            if (!schedule.contains(discipline)){
+            if (!disciplines.contains(discipline)){
                 groupAvrMarkValue = 0;
             }
             else {
@@ -104,7 +108,7 @@ public class Faculty {
     }
 
     public void addDisciplines(Discipline... disciplines) {
-        schedule.addAll(Arrays.asList(disciplines));
+        this.disciplines.addAll(Arrays.asList(disciplines));
     }
 
 
@@ -112,7 +116,7 @@ public class Faculty {
 //                                             Schedule
     public void printSchedule() {
         System.out.println("List of disciplines of " + facultyName.getTitle() + " faculty:");
-        for (Discipline discipline : schedule) {
+        for (Discipline discipline : disciplines) {
             System.out.println(discipline.getTitle());
         }
     }

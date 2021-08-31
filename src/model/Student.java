@@ -9,7 +9,7 @@ public class Student {
     private String name;
     private Faculty faculty;
     private Group group;
-    private Set<Discipline> schedule = new HashSet<>();
+    private Set<Discipline> disciplines = new HashSet<>();
     private Map<Discipline, Integer> dairy = new HashMap<>();
 
     public Student(String name) {
@@ -22,6 +22,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(Set<Discipline> disciplines) {
+        this.disciplines = disciplines;
     }
 
     public Faculty getFaculty() {
@@ -48,14 +56,6 @@ public class Student {
         this.dairy = dairy;
     }
 
-    public Set<Discipline> getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Set<Discipline> schedule) {
-        this.schedule = schedule;
-    }
-
     public String getScheduleAsString(Set<Discipline> schedule){
         StringBuilder scheduleAsString = new StringBuilder("| ");
         for (Discipline discipline : schedule){
@@ -75,7 +75,7 @@ public class Student {
 //---------------------------------------- Set random mark for discipline to check -------------------------------------
 
     public void setMarkForDiscipline(Discipline discipline, Integer mark) throws NoDisciplineException, MarkValueException {
-        if (schedule.contains(discipline) || !schedule.isEmpty()){
+        if (disciplines.contains(discipline) || !disciplines.isEmpty()){
             if (mark <= 0 || mark > 10){
                 throw new MarkValueException("Mark value is not in diapason from 1 to 10");
             }
@@ -90,7 +90,7 @@ public class Student {
 //---------------------------------------- Set random marks to students dairy ------------------------------------------
     public void setRandomMarksToDairy() throws NoDisciplineException, MarkValueException {
         Random random = new Random();
-        for (Discipline discipline : schedule){
+        for (Discipline discipline : disciplines){
             setMarkForDiscipline(discipline, (random.nextInt(10) + 1));
         }
     }
@@ -107,6 +107,6 @@ public class Student {
     }
 
     public String toStringWithSchedule() {
-        return "Student: |" + name + "| - " + "Disciplines: " + getScheduleAsString(schedule);
+        return "Student: |" + name + "| - " + "Disciplines: " + getScheduleAsString(disciplines);
     }
 }
