@@ -11,12 +11,11 @@ public class Student {
     private Group group;
     private List<Discipline> schedule = new ArrayList<>();
     private Map<Discipline, Integer> dairy = new HashMap<>();
-//--------------- Конструкторы:
+
     public Student(String name) {
         this.name = name;
     }
 
-//--------------- Геттеры и сеттеры:
     public String getName() {
         return name;
     }
@@ -56,7 +55,6 @@ public class Student {
     public void setSchedule(List<Discipline> schedule) {
         this.schedule = schedule;
     }
-//---------- Для красоты выводим список дисциплин студента в виде строки (для себя)------------------------------------
 
     public String getScheduleAsString(List<Discipline> schedule){
         StringBuilder scheduleAsString = new StringBuilder("| ");
@@ -65,6 +63,7 @@ public class Student {
         }
         return scheduleAsString.toString();
     }
+
     public String getDairyAsString(Map<Discipline, Integer> dairy){
         StringBuilder dairyAsString = new StringBuilder("| ");
         for (Map.Entry<Discipline, Integer> entry : dairy.entrySet()){
@@ -73,7 +72,7 @@ public class Student {
         return dairyAsString.toString();
     }
 
-//-------------------------------------------- Ставим случайную оценку по предмету (для проверки кода ------------------
+//---------------------------------------- Set random mark for discipline to check -------------------------------------
 
     public void setMarkForDiscipline(Discipline discipline, Integer mark) throws NoDisciplineException, MarkValueException {
         if (schedule.contains(discipline) || !schedule.isEmpty()){
@@ -88,7 +87,7 @@ public class Student {
             throw new NoDisciplineException("There are no such discipline in " + name + " dairy");
         }
     }
-//-------------------------------------------- Заполняем дневник рандомными оценками------------------------------------
+//---------------------------------------- Set random marks to students dairy ------------------------------------------
     public void setRandomMarksToDairy() throws NoDisciplineException, MarkValueException {
         Random random = new Random();
         for (Discipline discipline : schedule){
@@ -106,6 +105,7 @@ public class Student {
         return "Student: |" + name + "| - " +
                 "Dairy: " + getDairyAsString(dairy);
     }
+
     public String toStringWithSchedule() {
         return "Student: |" + name + "| - " + "Disciplines: " + getScheduleAsString(schedule);
     }

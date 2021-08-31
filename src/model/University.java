@@ -96,6 +96,33 @@ public class University {
         }
         System.out.println("Average mark value for student " + student + " is: " + avrMarkValue);
     }
+    public double getAvrMarkValueForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException, NoDisciplineException {
+        Collection<Double> facultyAvrMarkValues = new ArrayList<>();
+        double result = 0;
+        double universityAvrMarkValue = 0;
+        for (Faculty faculty : faculties){
+            if (faculty.getAvrMarkForDiscipline(discipline) != 0){
+                facultyAvrMarkValues.add(faculty.getAvrMarkForDiscipline(discipline));
+            }
+        }
+        if (facultyAvrMarkValues.size() != 0){
+            for (Double facultyAvrMarkValue : facultyAvrMarkValues){
+                result += facultyAvrMarkValue;
+            }
+            universityAvrMarkValue = result/facultyAvrMarkValues.size();
+        } else {
+            throw new NoDisciplineException("There is no such discipline in the university");
+        }
+        return universityAvrMarkValue;
+    }
+    public void printAvrMarkValueForDiscipline(Discipline discipline) throws NoDisciplineException, NoGroupException, NoStudentException {
+        if (getAvrMarkValueForDiscipline(discipline) == 0){
+            throw new NoDisciplineException("There is no discipline " + discipline.getTitle() + " in university" + universityName);
+        }
+        else {
+            System.out.println("The average mark value for discipline " + discipline.getTitle() + " in university " + universityName + " is: " + getAvrMarkValueForDiscipline(discipline));
+        }
+    }
 
 //-------------------------------Вспомогательный метод для простоты вывода в консоль списка факультетов-----------------
     public void printFaculties() throws NoFacultyException { // возможно также стоит проверить на null!!!!!!!!!

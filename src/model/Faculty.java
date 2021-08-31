@@ -67,26 +67,40 @@ public class Faculty {
         }
         return students;
     }
-// NEED TO OVERRIDE THIS METHOD TO GET AVERAGE VALUE FROM EACH GROUP (group.countAvrMarkValueForDiscipline(Discipline discipline))
 
-    public double getAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException, NoDisciplineException {
+    public double getAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException {
         Collection<Double> groupAvrMarkValues = new ArrayList<>();
+        double groupAvrMarkValue;
         double result = 0;
         if (groups.isEmpty()){
             throw new NoGroupException("There are no groups in " + facultyName.getTitle());
         }
         else {
-            for (Group group : groups){
-                groupAvrMarkValues.add(group.getAvrMarkForDiscipline(discipline));
+            if (!schedule.contains(discipline)){
+                groupAvrMarkValue = 0;
+            }
+            else {
+                for (Group group : groups){
+                    if (group.getAvrMarkForDiscipline(discipline) != 0) {
+                        groupAvrMarkValues.add(group.getAvrMarkForDiscipline(discipline));
+                    }
+                }
+                for (Double groupAvrValue  : groupAvrMarkValues){
+                    result += groupAvrValue;
+                }
+                groupAvrMarkValue = result/groupAvrMarkValues.size();
             }
         }
-        for (Double groupAvrValue  : groupAvrMarkValues){
-            result += groupAvrValue;
-        }
-        return result/groupAvrMarkValues.size();
+        return groupAvrMarkValue;
     }
-    public void printAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoDisciplineException, NoStudentException {
-        System.out.println("Average mark for discipline " + discipline.getTitle() + " in " + facultyName.getTitle() + " is " + getAvrMarkForDiscipline(discipline));
+
+    public void printAvrMarkForDiscipline(Discipline discipline) throws NoGroupException, NoStudentException, NoDisciplineException {
+        if (getAvrMarkForDiscipline(discipline) == 0){
+            throw new NoDisciplineException("There is no discipline" + discipline.getTitle() +  " in " + facultyName.getTitle());
+        }
+        else {
+            System.out.println("Average mark for discipline " + discipline.getTitle() + " in " + facultyName.getTitle() + " is " + getAvrMarkForDiscipline(discipline));
+        }
     }
 
     public void addDisciplines(Discipline... disciplines) {

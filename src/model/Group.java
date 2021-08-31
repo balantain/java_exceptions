@@ -18,10 +18,10 @@ public class Group{
         this.title = title;
     }
 
-    public void addStudent(Student... sts){ // добавление студентов в группу
+    public void addStudent(Student... sts){
         students.addAll(Arrays.asList(sts));
         for (Student student : students){
-            student.setSchedule(schedule); // возможно расписание не передается
+            student.setSchedule(schedule);
         }
     }
 
@@ -78,11 +78,14 @@ public class Group{
         return avrMarkValue;
     }
     public void printAvrMarkForDiscipline(Discipline discipline) throws NoStudentException {
-        System.out.println("Average mark for discipline " + discipline.getTitle() + " in group " + title + " is " + getAvrMarkForDiscipline(discipline));
-
+        if (getAvrMarkForDiscipline(discipline) == 0){
+            throw new NoStudentException("There is no discipline " + discipline.getTitle() + " in group " + title + "group.");
+        } else {
+            System.out.println("Average mark for discipline " + discipline.getTitle() + " in group " + title + " is " + getAvrMarkForDiscipline(discipline));
+        }
     }
 //--------------------------------------------- Maybe redundant ---------------------------------------------------
-    public void printSchedule(){                                    // вывод на печать списка дисциплин в группе
+    public void printSchedule(){
         System.out.println("List of disciplines of " + title + " group:");
         for (Discipline discipline : schedule){
             System.out.println(discipline.getTitle());

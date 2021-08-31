@@ -6,7 +6,7 @@ import model.*;
 // 2. непосредственно в группу через метод
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws NoGroupException, NoFacultyException, NoStudentException, NoDisciplineException, MarkValueException {
 //------------------------------------------- Create university --------------------------------------------------------
 
         University university = new University("BGU");
@@ -34,8 +34,8 @@ public class Main {
 
         eff.addDisciplines(Discipline.EFF_BANK_ANALYSIS, Discipline.EFF_FINANCE_ANALYSIS, Discipline.EFF_MACROECONOMICS, Discipline.EFF_MICROECONOMICS);
         hf.addDisciplines(Discipline.HF_HISTORY_OF_BELARUS, Discipline.HF_HISTORY_OF_SCIENCE_AND_TECHNICS, Discipline.HF_LATIN_LANGUAGE, Discipline.HF_WORLD_HISTORY);
-        irf.addDisciplines(Discipline.IRF_BELARUS_FOREIGN_POLICY,Discipline.IRF_HISTORY_OF_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_INTERNATIONAL_RELATIONS, Discipline.IRF_REGIONAL_CONFLICTS);
-        mmf.addDisciplines(Discipline.MMF_ALGEBRA, Discipline.MMF_GEOMETRY, Discipline.MMF_MATHS_ANALYSIS, Discipline.MMF_PHYSICS, Discipline.MMF_PROGRAMMING);
+        irf.addDisciplines(Discipline.ENGLISH, Discipline.IRF_BELARUS_FOREIGN_POLICY,Discipline.IRF_HISTORY_OF_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_INTERNATIONAL_RELATIONS, Discipline.IRF_REGIONAL_CONFLICTS);
+        mmf.addDisciplines(Discipline.ENGLISH, Discipline.MMF_ALGEBRA, Discipline.MMF_GEOMETRY, Discipline.MMF_MATHS_ANALYSIS, Discipline.MMF_PHYSICS, Discipline.MMF_PROGRAMMING);
 
 //--------------------------------- Print list of disciplines to check (successfully) ----------------------------------
 
@@ -95,79 +95,49 @@ public class Main {
 //---------------------------- Print list of all students in university to check (successfully) ------------------------
 
         System.out.println("List of all students in " + university.getUniversityName() + ":");
-        try {
-            for (Student student : university.getStudents()){
+        for (Student student : university.getStudents()){
                 System.out.println(student.toString());
-            }
-        } catch (NoStudentException | NoGroupException | NoFacultyException e) {
-            e.printStackTrace();
         }
 
 //-------------------- Print list of all students in university with schedule to check (successfully) ------------------
 
         System.out.println("List of all students in " + university.getUniversityName() + " with schedule:");
-        try {
-            for (Student student : university.getStudents()){
-                System.out.println(student.toStringWithSchedule());
-            }
-        } catch (NoStudentException | NoGroupException | NoFacultyException e) {
-            e.printStackTrace();
+        for (Student student : university.getStudents()){
+            System.out.println(student.toStringWithSchedule());
         }
 
 //---------------------------- Set random marks for each student in university -----------------------------------------
 
-        try {
-            university.setRandomMarksForStudents(university.getStudents());
-        } catch (NoDisciplineException | MarkValueException | NoStudentException | NoGroupException | NoFacultyException e) {
-            e.printStackTrace();
-        }
+        university.setRandomMarksForStudents(university.getStudents());
 
 //------------------- Print list of all students in university with dairy to check (successfully) ----------------------
 
         System.out.println("List of all students in " + university.getUniversityName() + " with dairy:");
-        try {
-            for (Student student : university.getStudents()){
-                System.out.println(student.toStringWithDairy());
-            }
-        } catch (NoStudentException | NoGroupException | NoFacultyException e) {
-            e.printStackTrace();
+        for (Student student : university.getStudents()){
+            System.out.println(student.toStringWithDairy());
         }
 
 //--------------------------------------------- Realizing tasks --------------------------------------------------------
 //                           Count average mark value for all disciplines fo student
-        try {
-            university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
-        } catch (NoDisciplineException | NoStudentException | NoGroupException | NoFacultyException e) {
-            e.printStackTrace();
-        }
+
+        university.countAvrMarkValueForStudentDairy(university.getStudentByName("Хомченко С.С."));
 
 //----------------------------------------------------------------------------------------------------------------------
 //                 Count average mark for concrete discipline at concrete faculty and concrete group
 //---------------------- Printing list of students with dairy in faculty to check (successfully) -----------------------
 
         System.out.println("List of all students with dairy in " + mmf.getFacultyName());
-        try {
-            for (Student student : mmf.getStudents()){
-                System.out.println(student.toStringWithDairy());
-            }
-        } catch (NoGroupException | NoStudentException e) {
-            e.printStackTrace();
+        for (Student student : mmf.getStudents()){
+            System.out.println(student.toStringWithDairy());
         }
 
+        mmf1.printAvrMarkForDiscipline(Discipline.MMF_GEOMETRY);
 
-        try {
-            mmf1.printAvrMarkForDiscipline(Discipline.MMF_GEOMETRY);
-        } catch (NoStudentException e) {
-            e.printStackTrace();
-        }
+        mmf.printAvrMarkForDiscipline(Discipline.MMF_ALGEBRA);
 
-        try {
-            mmf.printAvrMarkForDiscipline(Discipline.MMF_ALGEBRA);
-        } catch (NoDisciplineException | NoGroupException | NoStudentException e) {
-            e.printStackTrace();
-        }
+        mmf.printAvrMarkForDiscipline(Discipline.ENGLISH);
+        irf.printAvrMarkForDiscipline(Discipline.ENGLISH);
 
-        //-- Если начинать процесс создания студента с самого студента и передавать в него параметры группа и факультет, то в параметре факультет можно сохранить список предметов
-        // но тогда будет вероятность
+        university.printAvrMarkValueForDiscipline(Discipline.ENGLISH);
     }
 }
