@@ -9,7 +9,7 @@ public class Student {
     private String name;
     private Faculty faculty;
     private Group group;
-    private List<Discipline> schedule = new ArrayList<>();
+    private Set<Discipline> schedule = new HashSet<>();
     private Map<Discipline, Integer> dairy = new HashMap<>();
 
     public Student(String name) {
@@ -48,15 +48,15 @@ public class Student {
         this.dairy = dairy;
     }
 
-    public List<Discipline> getSchedule() {
+    public Set<Discipline> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(List<Discipline> schedule) {
+    public void setSchedule(Set<Discipline> schedule) {
         this.schedule = schedule;
     }
 
-    public String getScheduleAsString(List<Discipline> schedule){
+    public String getScheduleAsString(Set<Discipline> schedule){
         StringBuilder scheduleAsString = new StringBuilder("| ");
         for (Discipline discipline : schedule){
             scheduleAsString.append(discipline.getTitle()).append(" | ");

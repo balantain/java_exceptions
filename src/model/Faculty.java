@@ -8,9 +8,9 @@ import java.util.*;
 
 public class Faculty {
     FacultyName facultyName;
-    List<Group> groups = new ArrayList<>();
+    Set<Group> groups = new HashSet<>();
     List<Student> students = new ArrayList<>();
-    List<Discipline> schedule = new ArrayList<>(); // возможно стоит заменить на HashSet, чтобы не возможно было добавить два раза один и тот же предмет.
+    Set<Discipline> schedule = new HashSet<>();
 
     public Faculty(FacultyName facultyName) {
         this.facultyName = facultyName;
@@ -28,11 +28,11 @@ public class Faculty {
         return facultyName.getTitle();
     }
 
-    public List<Discipline> getSchedule() {
+    public Set<Discipline> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(List<Discipline> schedule) {
+    public void setSchedule(Set<Discipline> schedule) {
         this.schedule = schedule;
     }
 
@@ -40,7 +40,7 @@ public class Faculty {
         this.facultyName = facultyName;
     }
 
-    public List<Group> getGroups() throws NoGroupException {
+    public Set<Group> getGroups() throws NoGroupException {
         if (groups.isEmpty()) {
             throw new NoGroupException("There are no groups in " + facultyName.getTitle());
         } else {
@@ -48,7 +48,7 @@ public class Faculty {
         }
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
 
@@ -104,12 +104,12 @@ public class Faculty {
     }
 
     public void addDisciplines(Discipline... disciplines) {
-        schedule = Arrays.asList(disciplines);
+        schedule.addAll(Arrays.asList(disciplines));
     }
 
 
-//------------------------------------Вспомогательные методы для простоты вывода в консоль -----------------------------
-//                                                РАССПИСАНИЕ
+//------------------------------------ Methods to print to console -----------------------------
+//                                             Schedule
     public void printSchedule() {
         System.out.println("List of disciplines of " + facultyName.getTitle() + " faculty:");
         for (Discipline discipline : schedule) {
@@ -117,7 +117,8 @@ public class Faculty {
         }
     }
 
-//                                               СПИСОК ГРУПП
+//                                              Groups
+
     public void printGroups() throws NoGroupException {
         if (groups.size() != 0) {
             System.out.println("List of all groups in " + facultyName.getTitle() + " faculty:");

@@ -5,8 +5,8 @@ import exceptions.*;
 import java.util.*;
 
 public class University {
-    private String universityName;               //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    List<Faculty> faculties = new ArrayList<>(); // Список факультетов, как и студентов, возможно стоит преобразовать в сет, чтобы не было повторений студентов.
+    private String universityName;
+    Set<Faculty> faculties = new HashSet<>(); // Список факультетов, как и студентов, возможно стоит преобразовать в сет, чтобы не было повторений студентов.
     List<Student> students = new ArrayList<>();  // общий список студентов университета должен создаваться из списка групп, которые находятся факультетах
 
     public University(String universityName) {
@@ -21,7 +21,7 @@ public class University {
         this.universityName = universityName;
     }
 
-    public void setFaculties(List<Faculty> faculties) {
+    public void setFaculties(Set<Faculty> faculties) {
         this.faculties = faculties;
     }
 
@@ -33,7 +33,7 @@ public class University {
         faculties.addAll(Arrays.asList(fcs));
     }
 
-    public List<Faculty> getFaculties() throws NoFacultyException {
+    public Set<Faculty> getFaculties() throws NoFacultyException {
         if (faculties.isEmpty()){
             throw new NoFacultyException("There are no faculties added into the university");
         }
