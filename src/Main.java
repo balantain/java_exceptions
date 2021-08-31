@@ -1,10 +1,6 @@
 import exceptions.*;
 import model.*;
 
-// нужно добавить несколько вариантов добавления студентов в университет.
-// 1. с указанием факультета и группы при помощи конструктора
-// 2. непосредственно в группу через метод
-
 public class Main {
     public static void main(String[] args) throws NoGroupException, NoFacultyException, NoStudentException, NoDisciplineException, MarkValueException {
 //------------------------------------------- Create university --------------------------------------------------------
@@ -22,11 +18,7 @@ public class Main {
 
 //--------------------------------- Print list of students to check (successfully) -------------------------------------
 
-        try {
-            university.printFaculties();
-        } catch (NoFacultyException e) {
-            e.printStackTrace();
-        }
+        university.printFaculties();
         System.out.println();
 
 //-------------- Add disciplines to each faculty, because they are common for all groups in faculty --------------------
@@ -69,14 +61,10 @@ public class Main {
 
 //---------------------------- Print list of groups for each faculty to check (successfully) ---------------------------
 
-        try {
-            eff.printGroups();
-            hf.printGroups();
-            irf.printGroups();
-            mmf.printGroups();
-        } catch (NoGroupException e) {
-            e.printStackTrace();
-        }
+        eff.printGroups();
+        hf.printGroups();
+        irf.printGroups();
+        mmf.printGroups();
 
 //---------------------------------------------- Add students to each group --------------------------------------------
 

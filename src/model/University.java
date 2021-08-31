@@ -6,8 +6,8 @@ import java.util.*;
 
 public class University {
     private String universityName;
-    Set<Faculty> faculties = new HashSet<>(); // Список факультетов, как и студентов, возможно стоит преобразовать в сет, чтобы не было повторений студентов.
-    List<Student> students = new ArrayList<>();  // общий список студентов университета должен создаваться из списка групп, которые находятся факультетах
+    Set<Faculty> faculties = new HashSet<>();
+    List<Student> students = new ArrayList<>();
 
     public University(String universityName) {
         this.universityName = universityName;
