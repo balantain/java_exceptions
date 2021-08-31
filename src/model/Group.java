@@ -5,13 +5,14 @@ import exceptions.NoStudentException;
 
 import java.util.*;
 
-public class Group{
+public class Group extends Faculty {
     private String title;
     FacultyName facultyName;
     List<Student> students = new ArrayList<>();
     Set<Discipline> schedule = new HashSet<>();
 
     public Group(String title) {
+        super();
         this.title = title;
     }
 

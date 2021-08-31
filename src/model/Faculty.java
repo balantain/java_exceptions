@@ -6,14 +6,19 @@ import exceptions.NoStudentException;
 
 import java.util.*;
 
-public class Faculty {
+public class Faculty extends University{
     FacultyName facultyName;
     Set<Group> groups = new HashSet<>();
     List<Student> students = new ArrayList<>();
     Set<Discipline> schedule = new HashSet<>();
 
     public Faculty(FacultyName facultyName) {
+        super();
         this.facultyName = facultyName;
+    }
+
+    public Faculty() {
+
     }
 
     public void addGroup(Group... grs) {

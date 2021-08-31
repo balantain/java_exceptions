@@ -5,20 +5,32 @@ import exceptions.*;
 import java.util.*;
 
 public class University {
+
     private String universityName;
     Set<Faculty> faculties = new HashSet<>();
     List<Student> students = new ArrayList<>();
+    List<Discipline> disciplineList = new ArrayList<>();
 
+//----------------------------------------------- Constructors ---------------------------------------------------------
+    public University() {
+
+    }
     public University(String universityName) {
         this.universityName = universityName;
     }
-
+//--------------------------------------------- Getters & Setters ------------------------------------------------------
     public String getUniversityName() {
         return universityName;
     }
-
     public void setUniversityName(String universityName) {
         this.universityName = universityName;
+    }
+
+    public Set<Faculty> getFaculties() throws NoFacultyException {
+        if (faculties.isEmpty()){
+            throw new NoFacultyException("There are no faculties added into the university");
+        }
+        else return faculties;
     }
 
     public void setFaculties(Set<Faculty> faculties) {
@@ -27,17 +39,6 @@ public class University {
 
     public void setStudents(List<Student> students) {
         this.students = students;
-    }
-
-    public void addFaculty(Faculty... fcs){
-        faculties.addAll(Arrays.asList(fcs));
-    }
-
-    public Set<Faculty> getFaculties() throws NoFacultyException {
-        if (faculties.isEmpty()){
-            throw new NoFacultyException("There are no faculties added into the university");
-        }
-        else return faculties;
     }
 
     public List<Student> getStudents () throws NoStudentException, NoGroupException, NoFacultyException {
@@ -54,6 +55,22 @@ public class University {
             return students;
         }
     }
+
+    public void addFaculty(Faculty... fclts){
+        for (Faculty faculty : fclts){
+            faculty.schedule.addAll(disciplineList);
+        }
+        faculties.addAll(Arrays.asList(fclts));
+    }
+
+    public void addDisciplines(Discipline... disciplines) throws NoGroupException {
+        disciplineList.addAll(Arrays.asList(disciplines));
+        for (Faculty faculty : faculties){
+            faculty.schedule.addAll(Arrays.asList(disciplines));
+        }
+    }
+
+
 
 //------------------- Есть сомнения по поводу данного метода, как поступить, если студент не найден? ---------------
     public Student getStudentByName(String name) throws NoStudentException, NoGroupException, NoFacultyException {

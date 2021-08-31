@@ -9,7 +9,7 @@ public class Main {
 
 //--------------------------------------------- Add faculties ----------------------------------------------------------
 //                                        For convenience created enum
-
+        
         Faculty eff = new Faculty(FacultyName.EFF);
         Faculty hf = new Faculty(FacultyName.HF);
         Faculty irf = new Faculty(FacultyName.IRF);
@@ -23,11 +23,11 @@ public class Main {
 
 //-------------- Add disciplines to each faculty, because they are common for all groups in faculty --------------------
 //                                             For convenience created enum
-
+        university.addDisciplines(Discipline.ENGLISH);
         eff.addDisciplines(Discipline.EFF_BANK_ANALYSIS, Discipline.EFF_FINANCE_ANALYSIS, Discipline.EFF_MACROECONOMICS, Discipline.EFF_MICROECONOMICS);
         hf.addDisciplines(Discipline.HF_HISTORY_OF_BELARUS, Discipline.HF_HISTORY_OF_SCIENCE_AND_TECHNICS, Discipline.HF_LATIN_LANGUAGE, Discipline.HF_WORLD_HISTORY);
-        irf.addDisciplines(Discipline.ENGLISH, Discipline.IRF_BELARUS_FOREIGN_POLICY,Discipline.IRF_HISTORY_OF_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_INTERNATIONAL_RELATIONS, Discipline.IRF_REGIONAL_CONFLICTS);
-        mmf.addDisciplines(Discipline.ENGLISH, Discipline.MMF_ALGEBRA, Discipline.MMF_GEOMETRY, Discipline.MMF_MATHS_ANALYSIS, Discipline.MMF_PHYSICS, Discipline.MMF_PROGRAMMING);
+        irf.addDisciplines(Discipline.IRF_BELARUS_FOREIGN_POLICY,Discipline.IRF_HISTORY_OF_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_INTERNATIONAL_RELATIONS, Discipline.IRF_REGIONAL_CONFLICTS);
+        mmf.addDisciplines(Discipline.MMF_ALGEBRA, Discipline.MMF_GEOMETRY, Discipline.MMF_MATHS_ANALYSIS, Discipline.MMF_PHYSICS, Discipline.MMF_PROGRAMMING);
 
 //--------------------------------- Print list of disciplines to check (successfully) ----------------------------------
 
