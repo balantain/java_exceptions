@@ -1,20 +1,19 @@
 package model;
 
-import exceptions.MarkValueException;
-import exceptions.NoDisciplineException;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Student {
     private String name;
-    private Faculty faculty;
-    private Group group;
-    private Set<Discipline> disciplines = new HashSet<>();
-    private Map<Discipline, Integer> dairy = new HashMap<>();
+    private Map<Discipline, Integer> dairy;
+
+
 
     public Student(String name) {
         this.name = name;
     }
+
+
 
     public String getName() {
         return name;
@@ -24,89 +23,14 @@ public class Student {
         this.name = name;
     }
 
-    public Set<Discipline> getDisciplines() {
-        return disciplines;
-    }
-
-    public void setDisciplines(Set<Discipline> disciplines) {
-        this.disciplines = disciplines;
-    }
-
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
     public Map<Discipline, Integer> getDairy() {
+        if (dairy == null){
+            dairy = new HashMap<>();
+        }
         return dairy;
     }
 
     public void setDairy(Map<Discipline, Integer> dairy) {
         this.dairy = dairy;
-    }
-
-    public String getScheduleAsString(Set<Discipline> schedule){
-        StringBuilder scheduleAsString = new StringBuilder("| ");
-        for (Discipline discipline : schedule){
-            scheduleAsString.append(discipline.getTitle()).append(" | ");
-        }
-        return scheduleAsString.toString();
-    }
-
-    public String getDairyAsString(Map<Discipline, Integer> dairy){
-        StringBuilder dairyAsString = new StringBuilder("| ");
-        for (Map.Entry<Discipline, Integer> entry : dairy.entrySet()){
-            dairyAsString.append(entry.getKey().getTitle()).append(" - ").append(entry.getValue()).append(" | ");
-        }
-        return dairyAsString.toString();
-    }
-
-//---------------------------------------- Set random mark for discipline to check -------------------------------------
-
-    public void setMarkForDiscipline(Discipline discipline, Integer mark) throws NoDisciplineException, MarkValueException {
-        if (disciplines.contains(discipline) || !disciplines.isEmpty()){
-            if (mark <= 0 || mark > 10){
-                throw new MarkValueException("Mark value is not in diapason from 1 to 10");
-            }
-            else {
-                dairy.put(discipline, mark);
-            }
-        }
-        else {
-            throw new NoDisciplineException("There are no such discipline in " + name + " dairy");
-        }
-    }
-//---------------------------------------- Set random marks to students dairy ------------------------------------------
-    public void setRandomMarksToDairy() throws NoDisciplineException, MarkValueException {
-        Random random = new Random();
-        for (Discipline discipline : disciplines){
-            setMarkForDiscipline(discipline, (random.nextInt(10) + 1));
-        }
-    }
-
-
-    @Override
-    public String toString() {
-        return "Student: |" + name + "|";
-    }
-
-    public String toStringWithDairy() {
-        return "Student: |" + name + "| - " +
-                "Dairy: " + getDairyAsString(dairy);
-    }
-
-    public String toStringWithSchedule() {
-        return "Student: |" + name + "| - " + "Disciplines: " + getScheduleAsString(disciplines);
     }
 }
