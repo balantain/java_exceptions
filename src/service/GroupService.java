@@ -55,6 +55,8 @@ public class GroupService {
         }
     }
 
+    //------------------------------------------ Redundant methods to check myself -----------------------------------------
+
     public static void printGroupStudentList(Group group) throws NoStudentException {
         if (!group.getStudents().isEmpty()){
             System.out.println("List of students of " + group.getName() + " group:");

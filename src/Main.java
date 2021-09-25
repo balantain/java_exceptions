@@ -20,10 +20,6 @@ public class Main {
         Faculty mmfFaculty = new Faculty(FacultyName.MMF);
         UniversityService.addUniversityFaculties(bguUniversity, effFaculty, hfFaculty, irfFaculty, mmfFaculty);
 
-//--------------------------------- Print list of students to check (successfully) -------------------------------------
-
-        UniversityService.printUniversityFaculties(bguUniversity);
-
 //-------------- Add disciplines to each faculty, because they are common for all groups in faculty --------------------
 //                                             For convenience created enum
 
@@ -31,14 +27,6 @@ public class Main {
         FacultyService.addDisciplinesToFaculty(hfFaculty, Discipline.ENGLISH, Discipline.FRENCH, Discipline.HF_HISTORY_OF_BELARUS, Discipline.HF_HISTORY_OF_SCIENCE_AND_TECHNICS, Discipline.HF_LATIN_LANGUAGE, Discipline.HF_WORLD_HISTORY);
         FacultyService.addDisciplinesToFaculty(irfFaculty, Discipline.ENGLISH, Discipline.GERMAN, Discipline.IRF_BELARUS_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_FOREIGN_POLICY, Discipline.IRF_HISTORY_OF_INTERNATIONAL_RELATIONS, Discipline.IRF_REGIONAL_CONFLICTS);
         FacultyService.addDisciplinesToFaculty(mmfFaculty, Discipline.ENGLISH, Discipline.GERMAN, Discipline.MMF_ALGEBRA, Discipline.MMF_GEOMETRY, Discipline.MMF_MATHS_ANALYSIS, Discipline.MMF_PHYSICS, Discipline.MMF_PROGRAMMING);
-
-//--------------------------------- Print list of disciplines to check (successfully) ----------------------------------
-
-        FacultyService.printFacultyDisciplines(effFaculty);
-        FacultyService.printFacultyDisciplines(hfFaculty);
-        FacultyService.printFacultyDisciplines(irfFaculty);
-        FacultyService.printFacultyDisciplines(mmfFaculty);
-
 
 //-------------------------------------- Add groups to each faculty ----------------------------------------------------
 
@@ -56,13 +44,6 @@ public class Main {
         FacultyService.addFacultyGroups(irfFaculty, irf1Group, irf2Group);
         FacultyService.addFacultyGroups(mmfFaculty, mmf1Group, mmf2Group);
 
-//---------------------------- Print list of groups for each faculty to check (successfully) ---------------------------
-
-        FacultyService.printFacultyGroups(effFaculty);
-        FacultyService.printFacultyGroups(hfFaculty);
-        FacultyService.printFacultyGroups(irfFaculty);
-        FacultyService.printFacultyGroups(mmfFaculty);
-
 //---------------------------------------------- Add students to each group --------------------------------------------
 
         GroupService.addStudentsToGroup(eff1Group, new Student("Фадеев О.С."), new Student("Дубров Д.В."), new Student("Прохоров И.И."), new Student("Чигирь В.С."));
@@ -77,32 +58,12 @@ public class Main {
         GroupService.addStudentsToGroup(mmf1Group, new Student("Иванов И.И."), new Student("Петров П.П."), new Student("Сидоров С.С"), new Student("Сергеев С.С."));
         GroupService.addStudentsToGroup(mmf2Group, new Student("Мамехин М.М."), new Student("Мамонов Д.С."), new Student("Егоров Е.А."), new Student("Хомченко С.С."));
 
-//---------------------------- Print list of all students with dairy in university to check (successfully) -------------
-
-        UniversityService.printListOfAllStudentsWithDairy(bguUniversity);
-
-//---------------------------- Print list of all students with dairy in each group to check (successfully)------------
-        GroupService.printGroupStudentList(eff1Group);
-        GroupService.printGroupStudentList(eff2Group);
-        GroupService.printGroupStudentList(hf1Group);
-        GroupService.printGroupStudentList(hf2Group);
-        GroupService.printGroupStudentList(irf1Group);
-        GroupService.printGroupStudentList(irf2Group);
-        GroupService.printGroupStudentList(mmf1Group);
-        GroupService.printGroupStudentList(mmf2Group);
-
 //--------------------------------------------- Realizing tasks --------------------------------------------------------
 //                           Count average mark value for all disciplines for student
         StudentService.printAvrMarkForStudentDairy(UniversityService.getStudentByName(bguUniversity, "Хомченко С.С."));
         StudentService.printAvrMarkForStudentDairy(UniversityService.getStudentByName(bguUniversity, "Мамехин М.М."));
 
 //                 Count average mark for concrete discipline at concrete faculty and concrete group
-//---------------------- Printing list of students with dairy in faculty to check (successfully) -----------------------
-
-        System.out.println("List of all students with dairy in " + mmfFaculty.getFacultyName());
-        for (Student student : FacultyService.getFacultyStudentList(mmfFaculty)) {
-            StudentService.printStudentInfo(student);
-        }
 //---------------------- Counting average mark for discipline for concrete group ---------------------------------------
         GroupService.printAvrMarkForDiscipline(mmf1Group, Discipline.MMF_GEOMETRY);
 

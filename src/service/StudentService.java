@@ -17,7 +17,6 @@ public class StudentService {
         }
     }
 
-// Count average value for all disciplines of a student-----------------------------------------------------------------
     public static void printAvrMarkForStudentDairy (Student student) throws MarkValueException, NoDisciplineException {
         int result = 0;
         if (student.getDairy().isEmpty()){

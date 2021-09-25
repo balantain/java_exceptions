@@ -66,19 +66,6 @@ public class UniversityService {
         }
     }
 
-    public static Faculty getUniversityFaculty(University university, FacultyName facultyName) throws NoFacultyException {
-        Faculty fcl = null;
-        for (Faculty faculty : university.getFaculties()){
-            if (facultyName.equals(faculty.getFacultyName())){
-                fcl = faculty;
-            }
-        }
-        if (fcl == null){
-            throw new NoFacultyException("There is no faculty " + facultyName + " in university " + university.getUniversityName());
-        }
-        return fcl;
-    }
-
 //------------------------------------------ Redundant methods to check myself -----------------------------------------
 
     public static void printUniversityFaculties(University university) throws NoFacultyException {
@@ -99,5 +86,18 @@ public class UniversityService {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public static Faculty getUniversityFaculty(University university, FacultyName facultyName) throws NoFacultyException {
+        Faculty fcl = null;
+        for (Faculty faculty : university.getFaculties()){
+            if (facultyName.equals(faculty.getFacultyName())){
+                fcl = faculty;
+            }
+        }
+        if (fcl == null){
+            throw new NoFacultyException("There is no faculty " + facultyName + " in university " + university.getUniversityName());
+        }
+        return fcl;
     }
 }
